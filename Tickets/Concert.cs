@@ -1,26 +1,31 @@
-﻿using System;
+/*Changes: -Unnecessary using directives have been removed
+           -Camelcase is better (according to microssoft) so some variables have changeed
+           -Exception message has been changed/imoroved
+           -Concert renamed to concertTickets (makes more sense, it's more specific)
+*/
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Tickets
 {
     internal class Concert
     {
-        private string _BandName;
+        private string _bandName;
+        private List<ConcertTicket> _concertTickets;
+        
         //properties
         public string BandName
         {
-            get { return _BandName; }
-            set { _BandName = value; }
+            get { return _bandName; }
+            set { _bandName = value; }
         }
 
-        List<ConcertTicket> concert;
+
         public Concert(string name)
         {
             BandName = name;
-            concert = new List<ConcertTicket>();
+            _concertTickets = new List<ConcertTicket>();
         }
 
         //methods
@@ -28,17 +33,17 @@ namespace Tickets
         {
             if (ct.ConcertName != BandName)
             {
-                throw new WrongConcertException("Sorry - this is the wrong concert");
+                throw new WrongConcertException("Sorry - this is the wrong concert" + ct.ConcertName);
             }
             else
             {
-                concert.Add(ct);
+                _concertTickets.Add(ct);
             }
         }
 
         public void OutputAllSeats()
         {
-            foreach (ConcertTicket ct in concert)
+            foreach (ConcertTicket ct in _concertTickets)
             {
                 Console.WriteLine(ct.OutputStatus());
             }
