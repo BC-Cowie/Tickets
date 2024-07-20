@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Tickets
 {
     internal class Concert
     {
-        private string _BandName;
+        private string _bandName;
         //properties
-        public string BandName
+        public string bandName
         {
             get { return _BandName; }
             set { _BandName = value; }
         }
 
-        List<ConcertTicket> concert;
+        //constructor
+        private List<ConcertTicket> _concertTickets;
         public Concert(string name)
         {
             BandName = name;
-            concert = new List<ConcertTicket>();
+            _concertTickets = new List<ConcertTicket>();
         }
 
         //methods
@@ -28,17 +27,17 @@ namespace Tickets
         {
             if (ct.ConcertName != BandName)
             {
-                throw new WrongConcertException("Sorry - this is the wrong concert");
+                throw new WrongConcertException("Sorry - this is the wrong concert" + ct.ConcertName);
             }
             else
             {
-                concert.Add(ct);
+                _concertTickets.Add(ct);
             }
         }
 
         public void OutputAllSeats()
         {
-            foreach (ConcertTicket ct in concert)
+            foreach (ConcertTicket ct in _concertTicket)
             {
                 Console.WriteLine(ct.OutputStatus());
             }
